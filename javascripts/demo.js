@@ -16,12 +16,21 @@ $(document).ready(function($) {
 
 
     // Display the current value from the datastream
-    $(selector).html( datastream["current_value"] );
+    if ( datastream["current_value"] == "1" ) {
+        $(selector).html( "open" );
+    } else {
+        $(selector).html( "closed" );
+    }
+    
 
     // Getting realtime! The function associated with the subscribe method will be executed every time there is an update to the datastream
     xively.datastream.subscribe( feedID, datastreamID, function ( event , datastream_updated ) {
-      // Display the current value from the updated datastream
-      $(selector).html( datastream_updated["current_value"] );
+        // Display the current value from the updated datastream
+        if ( datastream_updated["current_value"] == "1" ) {
+            $(selector).html( "open" );
+        } else {
+            $(selector).html( "closed" );
+        }
     });
 
   });
